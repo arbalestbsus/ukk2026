@@ -54,7 +54,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
 
     Route::get('/database/export', [DatabaseController::class, 'export'])->name('admin.database.export');
-});
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
+    Route::post('/kategori', [\App\Controllers\KategoriController::class, 'store'])->name('kategori.store');
+    
+    Route::get('/kategori/edit/{id_kategori}', [\App\Controllers\KategoriController::class, 'edit'])
+    ->name('kategori.edit');
+    Route::put('/kategori/{id_kategori}', [\App\Controllers\KategoriController::class, 'update'])
+    ->name('kategori.update');
+    Route::delete('/kategori/{id_kategori}', [\App\Controllers\KategoriController::class, 'destroy'])
+    ->name('kategori.destroy');
+    });
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +76,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 */
 // @generated-roles:start
 
+// @role:siswa:start
+Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('siswa.dashboard');
+});
+// @role:siswa:end
 // @generated-roles:end
 
 /*
